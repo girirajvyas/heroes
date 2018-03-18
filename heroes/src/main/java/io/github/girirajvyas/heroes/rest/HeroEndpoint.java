@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:4200")
 @RestController
 public class HeroEndpoint {
 	
@@ -42,7 +42,7 @@ public class HeroEndpoint {
 		return heroes;
 	}*/
 	
-	@RequestMapping("/heroes")
+	@RequestMapping(value="/heroes", method = RequestMethod.GET)
 	public List<Hero> searchHeroesByName(@RequestParam(value="name", required=false) String name){
 		System.out.println("searchHeroesByName" + name);
 		String my = "Mr. Nice";
@@ -62,7 +62,7 @@ public class HeroEndpoint {
 		return heroes;
 	}
 	
-	@RequestMapping("/heroes/{id}")
+	@RequestMapping(value="/heroes/{id}", method = RequestMethod.GET)
 	public Hero getHero(@PathVariable("id") Integer id) {
 		System.out.println("Inside getHero with id: " + id);
 		Optional<Hero> hero2 = heroes.stream().filter(hero -> hero.getId() == id).findFirst();
